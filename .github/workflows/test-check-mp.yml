@@ -24,4 +24,4 @@ jobs:
         with:
           mm-key: '${{ secrets.MM_KEY }}'
           checkout-code: false
-          path: '${{env.MODEL_PATH}}'
+          path: '${{vars.MODEL_PATH}}'
