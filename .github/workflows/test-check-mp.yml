@@ -25,4 +25,3 @@ jobs:
           mm-key: '${{ secrets.MM_KEY }}'
           checkout-code: false
           path: ${{github.workspace}}/${{vars.MODEL_PATH}}
-          debug: true
