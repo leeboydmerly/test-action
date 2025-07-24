@@ -22,7 +22,6 @@ jobs:
       - name: Merly Mentor Check MP
         uses: merly-ai/mentor-action@v1
         with:
-          fetch-depth: 0
           mm-key: '${{ secrets.MM_KEY }}'
           checkout-code: false
           path: ${{vars.MODEL_PATH}}
