@@ -20,10 +20,9 @@ jobs:
           path: ${{vars.MODEL_PATH}}
 
       - name: Merly Mentor Check MP
-        uses: merly-ai/mentor-action@v1
+        uses: merly-ai/mentor-action@v0.10.2
         with:
           mm-key: '${{ secrets.MM_KEY }}'
           checkout-code: false
           path: ${{vars.MODEL_PATH}}
           max_issue_count: 2
-          docker-tag: v0.10.2
