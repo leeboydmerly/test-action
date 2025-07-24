@@ -26,4 +26,4 @@ jobs:
           mm-key: '${{ secrets.MM_KEY }}'
           checkout-code: false
           path: ${{vars.MODEL_PATH}}
-          max_issue_count: 2
+          max-issue-count: 2
