@@ -102,6 +102,69 @@ Before creating PRs, ensure your repository has:
     DEBUG: <<
     ```
 
+### 8. `max_issue_count_fail`
+
+* **Description:** Tests that when the total issues found meets or exceeds the `max-issue-count`, the pipeline fails.
+* **Prerequisite:**
+  1. In the Mentor step, set `max-issue-count: 2`.
+* **Expected output:**
+
+  ```text
+  Warning:  ❌ ALERT: 6 New Issues Found (meets or exceeds max-issue-count of 2).
+  ```
+
+### 9. `max_issue_count_succeed`
+
+* **Description:** Tests that when the `max-issue-count` is above the total issues found, the pipeline succeeds.
+* **Prerequisite:**
+  1. In the Mentor step, set `max-issue-count: 10`.
+* **Expected output:**
+
+  ```text
+  ✅ Warning: ⚠️ ALERT: 6 New Issues Found!
+  ```
+
+### 10. `max_issue_priority_string_fail`
+
+* **Description:** Tests that when using a string for `max-issue-priority`, issues at or above that priority fail.
+* **Prerequisite:**
+  1. In the Mentor step, set `max-issue-priority: Critical`.
+* **Expected output:**
+
+  ```text
+  Warning:  ❌ ALERT: at least one issue’s priority meets or exceeds max-issue-priority of Critical.
+  ```
+
+### 11. `max_issue_priority_number_fail`
+
+* **Description:** Tests that when using a number for `max-issue-priority`, issues at or above that numeric level fail.
+* **Prerequisite:**
+  1. In the Mentor step, set `max-issue-priority: 3`.
+* **Expected output:**
+
+  ```text
+  Warning:  ❌ ALERT: at least one issue’s priority meets or exceeds max-issue-priority of High.
+  ```
+
+### 12. `priority_threshold_above_issues_found`
+
+* **Description:** Tests that when all issues found have a lower priority than the `max-issue-priority` threshold, the pipeline succeeds.
+* **Prerequisite:**
+  1. In the Mentor step, set `max-issue-priority: Critical` (or a numeric level above existing issue priorities).
+* **Expected output:**
+
+  ```text
+  Warning: Issue ID=0:1, state = anomaly and priority = High
+   - test_new_file.py:2:3: issue => Issue ID=0:1, state = anomaly and priority = High @ https://github.com/leeboydmerly/test-action/blob/c11da89d6455227e4abc2f8d02e28d14e7b71e12/test_new_file.py#L2
+
+  Warning:  ⚠️ ALERT: 1 New Issues Found!
+  ```
+
 ---
 
-*Add additional branches by following the format above.*
+## Other Suggested Test Scenarios
+
+* **Out‑of‑Range Values:** Set `max-issue-count` or `max-issue-priority` to values outside valid ranges (e.g., `max-issue-priority: 10` or `max-issue-count: -1`) and verify error handling.
+* **Zero Defaults:** Explicitly set `max-issue-count: 0` and `max-issue-priority: 0` to confirm they default correctly (no failures when unused).
+* **Descending Order Verification:** Confirm issues are printed in descending order by priority and timestamp.
+* **Key Combinations:** Run scenarios both with and without the `MM_KEY` secret to validate the new variables function correctly under free vs. licensed modes.
